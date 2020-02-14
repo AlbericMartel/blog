@@ -20,9 +20,26 @@
 
 #### Mutation testing
 
-En java : http://pitest.org/
+Mutation testing est utilisé pour tester les tests et leur qualité.
+
+En java : 
+
+http://pitest.org/
+
+https://github.com/STAMP-project/pitmp-maven-plugin
+
+https://www.triology.de/en/blog-entries/mutation-testing
+
+https://www.triology.de/en/blog-entries/mutation-testing-sonarqube
+
+https://www.youtube.com/watch?v=nf2xpqcZouY
+
+https://plugins.jenkins.io/pitmutation
+
 
 #### Property based testing
+
+Property based testing est utilisé pour tester le code.
 
 En java : https://jqwik.net/
 
