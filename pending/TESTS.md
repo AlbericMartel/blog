@@ -36,6 +36,74 @@ https://www.youtube.com/watch?v=nf2xpqcZouY
 
 https://plugins.jenkins.io/pitmutation
 
+Ajout dans le POM parent du projet :
+
+    <scm>
+        ...
+        <connection>${scm.url}</connection> <!-- Nécessaire à l'exécution du mutation testing incrémental -->
+    </scm>
+
+    <properties>
+        ...
+        <pitmpplugin.version>1.3.7</pitmpplugin.version>
+    </properties>
+        
+    <profiles>
+        <profile>
+            <id>pitest</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>eu.stamp-project</groupId>
+                        <artifactId>pitmp-maven-plugin</artifactId>
+                        <version>${pitmpplugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <targetClasses>
+                                <param>com.company*</param>
+                            </targetClasses>
+                            <targetTests>
+                                <param>com.company*Test</param>
+                            </targetTests>
+                            <skipFailingTests>true</skipFailingTests>
+                            <withHistory>true</withHistory> <!-- Permet de ne rebuilder que ce qui a changé --> 
+                            <outputFormats>
+                                <outputFormat>HTML</outputFormat>
+                                <outputFormat>XML</outputFormat>
+                            </outputFormats>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+La configuration possible est disponible ici :
+
+https://github.com/hcoles/pitest/blob/master/pitest-maven/src/main/java/org/pitest/maven/AbstractPitMojo.java
+
+https://github.com/hcoles/pitest/blob/master/pitest-maven/src/main/java/org/pitest/maven/ScmMojo.java
+
+Pour exécuter le mutation testing en mode incrémental :
+
+    mvn org.pitest:pitest-maven:scmMutationCoverage
+    
+Pour intégrer les résultats de test de mutation à sonar (à exécuter la nuit car peut prendre beaucoup de temps) :
+
+    mvn clean verify -Ppitest sonar:sonar -D sonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_AUTH_TOKEN  -Dsonar.branch=develop -Dsonar.pitest.mode=reuseReport
+
+Configuration de sonar :
+
+Source : https://www.triology.de/en/blog-entries/mutation-testing-sonarqube External Link
+
+Installer le plugin Mutation Analysis. Sous le menu Rules, rechercher survived mutant et cliquer sur activate.
 
 #### Property based testing
 
