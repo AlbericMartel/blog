@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Example mapping"
-categories: Process
-tags: Process US
+categories: Design
+tags: Design US
 author: Albéric Martel
 description: Atelier d'Example mapping pour discuter et préciser une User Story.
 ---

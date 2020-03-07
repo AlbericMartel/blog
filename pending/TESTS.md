@@ -142,7 +142,7 @@ et supprimer l'argument simple et ajouter plus d'éléments dans la collection d
 
 - Mock object : Pour mocker les dépendances externes et coûteuses. Les mocks ont l'avantage de ne retourner que des données minimales requises, encouragent à etre précautionneux sur la visibilité
  de chaque objet pour réduire le couplage. Le risque est d'utiliser des données qui ne correspondent à ce qui serait attendu en réalité. Dans ce cas, utiliser des données réelles attendues.
-- Self shunt : Pour tester qu'un objet communique bien avec un autre, on peut faire communiquer cete objet avec la classe de test. Par exemple, l'objet A doit parler avec B, 
+- Self shunt : Pour tester qu'un objet communique bien avec un autre, on peut faire communiquer cet objet avec la classe de test. Par exemple, l'objet A doit parler avec B, 
 alors il pourrait être plus simple que B parle avec une interface. Cette interface peut aussi être implémentée par la classe de test et passée à l'objet. Préférer des interfaces réduites au strict nécessaire.
 - Crash test dummy : C'est comme un mock mais sans avoir besoin de mocker l'objet complet. Par exemple, juste créer une inner class avec une méthode spécifique levant une exception à tester.
 - Broken test : En sortant d'une session de programmation en solo, on peut laisser un test en échec pour faciliter notre retour où on en était sans réfléchir à ce qu'on était en train de faire.
